@@ -1,0 +1,14 @@
+@route('/databasetest')
+def DatabaseItems():
+    # connect to my database
+    conn = sqlite3.connect("users.db")
+    c = conn.cursor()
+
+    # run query to retrieve rows from my database
+    c.execute("SELECT* FROM users")
+
+    # save rows returned by this query in the result object
+    result = c.fetchall()
+    c.close()
+    output = template('make_table', rows=result)
+    return output
